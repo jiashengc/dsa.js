@@ -1,32 +1,38 @@
-function SinglyNode(data) {
-    this.data = data;
-    this.next = null;
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
 }
 
-function DoublyNode(data) {
-    this.data = data;
-    this.next = null;
-    this.previous = null;
+class DoublyNode extends Node {
+    constructor(data) {
+        super(data);
+        this.previous = null;
+    }
 }
 
-function StackNode(data) {
-    this.data = data;
-    this.next = null;
+class List {
+    constructor() {
+        this._length = 0;
+    }
 }
 
-function SinglyList() {
-    this._length = 0;
-    this.head = null;
+class SinglyList extends List {
+    constructor() {
+        this.head = null;
+    }
+    
     
     /**
      * Add a value to the end of node
      * 
      * @method add
      * @param {Object} value
-     * @return {SinglyNode} node - the new node created
+     * @return {Node} node - the new node created
      */
-    this.add = function(value) {
-        let node = new SinglyNode(value),
+    add(value) {
+        let node = new Node(value),
             currentNode = this.head;
         
         // GUARD: If Empty List
@@ -54,7 +60,7 @@ function SinglyList() {
      * @param {Integer} position
      * @return {Object} deleted Node value
      */
-    this.remove = function(position) {
+    remove(position) {
         let currentNode = this.head,
             count = 0,
             message = {failure: 'Failure: Node not found in this list'},
@@ -94,10 +100,11 @@ function SinglyList() {
     /**
      * Search for a node at a position
      * 
+     * @method searchNodeAt
      * @param {Integer} position
-     * @return {SinglyNode} node - the node at the position
+     * @return {Node} node - the node at the position
      */
-    this.searchNodeAt = function(position) {
+    searchNodeAt(position) {
         let currentNode = this.head,
             length = this._length;
             count = 1;
@@ -117,18 +124,21 @@ function SinglyList() {
     }
 }
 
-function DoublyList() {
-    this._length = 0;
-    this.head = null;
-    this.tail = null;
+class DoublyList extends List {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+    
 
     /**
      * Add a value to the end of the list
      * 
+     * @method add
      * @param {Object} value
      * @return {DoublyNode} node - node added
      */
-    this.add = function(value) {
+    add(value) {
         let node = new DoublyNode(value);
 
         if (this._length) {
@@ -146,10 +156,13 @@ function DoublyList() {
     }
 
     /**
+     * Remove node at a posititon
+     * 
+     * @method remove
      * @param {Integer} position
      * @return {Object} deleted Node value
      */
-    this.remove = function(position) {
+    remove(position) {
         let currentNode = this.head,
             length = this._length,
             count = 1,
@@ -214,8 +227,12 @@ function DoublyList() {
 
     /**
      * Search for a node at position
+     * 
+     * @method searchNodeAt
+     * @param {Integer} position
+     * @return {DoublyNode}
      */
-    this.searchNodeAt = function(position) {
+    searchNodeAt(position) {
         let currentNode = this.head,
             length = this._length,
             count = 1;
@@ -235,15 +252,35 @@ function DoublyList() {
     }
 }
 
-function Stack() {
-    this.top = null;
+class Stack {
+    constructor() {
+        this.top = null;
+    }
+    
+
+    /**
+     * Push to the top node
+     * 
+     * @method push
+     * @param {Object} value
+     * @return {Node} top node
+     */
+    push(value) {
+        let newTop = new Node();
+        newTop.data = value;
+        newTop.next = this.top;
+        this.top = newTop;
+
+        return newTop;
+    }
 
     /**
      * Pop the top node
      * 
+     * @method pop
      * @return {Object} deleted node
      */
-    this.pop = function() {
+    pop() {
         let currentNode = this.top,
             deletedNode = null,
             message = {failure: 'Failure: There is nothing to pop'};
@@ -260,19 +297,27 @@ function Stack() {
         return deletedNode;
     }
 
-    /**
-     * Push to the top node
-     * 
-     * @param {Object} value
-     * @return {StackNode} top node
-     */
-    this.push = function(value) {
-        let newTop = new StackNode();
-        newTop.data = value;
-        newTop.next = this.top;
-        this.top = newTop;
+}
 
-        return newTop;
+class Queue {
+    constructor() {
+        this.first = null;
+        this.last = null;
     }
+    
 
+    /**
+     * Enqueue node
+     * 
+     * @method enqueue
+     * @param {Object} value
+     * @return {Node} last node
+     */
+    enqueue(value) {
+        let back = null;
+
+        if (!this.first) {
+            back = new Node();
+        }
+    }
 }
