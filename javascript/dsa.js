@@ -9,6 +9,11 @@ function DoublyNode(data) {
     this.previous = null;
 }
 
+function StackNode(data) {
+    this.data = data;
+    this.next = null;
+}
+
 function SinglyList() {
     this._length = 0;
     this.head = null;
@@ -17,7 +22,7 @@ function SinglyList() {
      * Add a value to the end of node
      * 
      * @method add
-     * @param {Number} value
+     * @param {Object} value
      * @return {SinglyNode} node - the new node created
      */
     this.add = function(value) {
@@ -47,7 +52,7 @@ function SinglyList() {
      * 
      * @method remove
      * @param {Integer} position
-     * @return {SinglyNode} deleted Node
+     * @return {Object} deleted Node value
      */
     this.remove = function(position) {
         let currentNode = this.head,
@@ -65,7 +70,7 @@ function SinglyList() {
         // GUARD: Head to be deleted
         if (position === 1) {
             this.head = currentNode.next;
-            deletedNode = currentNode;
+            deletedNode = currentNode.data;
             currentNode = null;
             this._length--;
 
@@ -79,7 +84,7 @@ function SinglyList() {
         }
 
         beforeNodeToDelete.next = nodeToDelete.next;
-        deletedNode = nodeToDelete;
+        deletedNode = nodeToDelete.data;
         nodeToDelete = null;
         this._length--;
 
@@ -120,7 +125,7 @@ function DoublyList() {
     /**
      * Add a value to the end of the list
      * 
-     * @param {Number} value
+     * @param {Object} value
      * @return {DoublyNode} node - node added
      */
     this.add = function(value) {
@@ -142,7 +147,7 @@ function DoublyList() {
 
     /**
      * @param {Integer} position
-     * @return {DoublyNode} deleted node
+     * @return {Object} deleted Node value
      */
     this.remove = function(position) {
         let currentNode = this.head,
@@ -170,7 +175,8 @@ function DoublyList() {
                 this.nail = null;
             }
 
-            deletedNode = nodeToDelete;
+            deletedNode = nodeToDelete.data;
+            nodeToDelete = null;
             this.length--;
             return deletedNode;
         }
@@ -181,7 +187,8 @@ function DoublyList() {
             this.tail = this.tail.previous;
             this.tail.next = null;
 
-            deletedNode = nodeToDelete;
+            deletedNode = nodeToDelete.data;
+            nodeToDelete = null;
             this.length--;
             return deletedNode;
         }
@@ -197,7 +204,8 @@ function DoublyList() {
 
         beforeNodeToDelete.next = afterNodeToDelete;
         afterNodeToDelete.previous = beforeNodeToDelete;
-        deletedNode = nodeToDelete;
+        deletedNode = nodeToDelete.data;
+        nodeToDelete = null;
         
         this.length--;
 
@@ -225,4 +233,46 @@ function DoublyList() {
 
         return currentNode;
     }
+}
+
+function Stack() {
+    this.top = null;
+
+    /**
+     * Pop the top node
+     * 
+     * @return {Object} deleted node
+     */
+    this.pop = function() {
+        let currentNode = this.top,
+            deletedNode = null,
+            message = {failure: 'Failure: There is nothing to pop'};
+
+        // GUARD: Check if top is null
+        if (!this.top) {
+            throw new Error(message.failure);
+        }
+
+        deletedNode = currentNode.data;
+        this.top = currentNode.next;
+        currentNode = null;
+
+        return deletedNode;
+    }
+
+    /**
+     * Push to the top node
+     * 
+     * @param {Object} value
+     * @return {StackNode} top node
+     */
+    this.push = function(value) {
+        let newTop = new StackNode();
+        newTop.data = value;
+        newTop.next = this.top;
+        this.top = newTop;
+
+        return newTop;
+    }
+
 }
