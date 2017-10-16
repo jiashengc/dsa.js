@@ -21,8 +21,7 @@ class List {
 class SinglyList extends List {
     constructor() {
         this.head = null;
-    }
-    
+    }    
     
     /**
      * Add a value to the end of node
@@ -128,8 +127,7 @@ class DoublyList extends List {
     constructor() {
         this.head = null;
         this.tail = null;
-    }
-    
+    }  
 
     /**
      * Add a value to the end of the list
@@ -175,7 +173,6 @@ class DoublyList extends List {
         if (position < 1 || position > length) {
             throw new Error(message.failure);
         }
-
         
         // GUARD: Head to be deleted
         if (position === 1) {
@@ -257,7 +254,6 @@ class Stack {
         this.top = null;
     }
     
-
     /**
      * Push to the top node
      * 
@@ -303,8 +299,7 @@ class Queue {
     constructor() {
         this.first = null;
         this.last = null;
-    }
-    
+    }    
 
     /**
      * Enqueue node
@@ -321,3 +316,4 @@ class Queue {
         }
     }
 }
+
