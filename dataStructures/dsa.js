@@ -1,4 +1,6 @@
-/** Class representing a Node */
+/** 
+ * Class representing a Node  
+ */
 class Node {
 
     /**
@@ -27,7 +29,9 @@ class DoublyNode extends Node {
     }
 }
 
-/** Class representing a List */
+/** 
+ * Class representing a List 
+ */
 class List {
 
     /**
@@ -356,19 +360,35 @@ class Queue {
      * @param {Object} value
      */
     enqueue(value) {
-        let back = null;
-
         if (!this.first) {
-            back = new Node();
-            first = back;
+            this.last = new Node(value);
+            this.first = newNode;
         } else {
-            back.next = new Node(value);
-            back = back.next;
+            this.last.next = new Node(value);
+            this.last = this.last.next;
         }
     }
 
+    /**
+     * @method dequeue
+     * @param {Object} value 
+     * @return {Object} data - the deleted data
+     */
     dequeue(value) {
+        if (!this.first) {
+            return null;
+        }
+        let data = this.first.data;
+        this.first = first.next;
+        return data;
+    }
 
+    /**
+     * @method peek
+     * @return {Node} the first node
+     */
+    peek() {
+        return this.first;
     }
 
 }
