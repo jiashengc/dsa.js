@@ -1,24 +1,52 @@
+/** Class representing a Node */
 class Node {
+
+    /**
+     * Creates a Node
+     * @param {Object} data 
+     */
     constructor(data) {
         this.data = data;
         this.next = null;
     }
 }
 
+/** 
+ * Class representing a DoublyNode
+ * @extends Node
+ */
 class DoublyNode extends Node {
+
+    /**
+     * Creates a Doubly Node
+     * @param {Object} data 
+     */
     constructor(data) {
         super(data);
         this.previous = null;
     }
 }
 
+/** Class representing a List */
 class List {
+
+    /**
+     * Creates a List
+     */
     constructor() {
         this._length = 0;
     }
 }
 
+/**
+ * Class representing a Singly LinkedList
+ * @extends List
+ */
 class SinglyList extends List {
+
+    /**
+     * Creates a SinglyList
+     */
     constructor() {
         this.head = null;
     }    
@@ -123,7 +151,15 @@ class SinglyList extends List {
     }
 }
 
+/**
+ * Class representing a Doubly LinkedList
+ * @extends List
+ */
 class DoublyList extends List {
+
+    /**
+     * Creates a DoublyList
+     */
     constructor() {
         this.head = null;
         this.tail = null;
@@ -249,7 +285,12 @@ class DoublyList extends List {
     }
 }
 
+/** Class representing a Stack */
 class Stack {
+
+    /**
+     * Creates a Stack
+     */
     constructor() {
         this.top = null;
     }
@@ -295,7 +336,14 @@ class Stack {
 
 }
 
+/**
+ * Class representing a Queue
+ */
 class Queue {
+
+    /**
+     * Creates a Queue
+     */
     constructor() {
         this.first = null;
         this.last = null;
@@ -306,14 +354,22 @@ class Queue {
      * 
      * @method enqueue
      * @param {Object} value
-     * @return {Node} last node
      */
     enqueue(value) {
         let back = null;
 
         if (!this.first) {
             back = new Node();
+            first = back;
+        } else {
+            back.next = new Node(value);
+            back = back.next;
         }
     }
+
+    dequeue(value) {
+
+    }
+
 }
 
