@@ -1,7 +1,3 @@
-let imported = document.createElement('script');
-imported.src = 'dataStructures/nodes.js';
-document.head.appendChild(imported);
-
 /** 
  * Class representing a List 
  */
@@ -127,3 +123,137 @@ class SinglyList extends List {
         return currentNode;
     }
 }
+
+/**
+ * Class representing a Doubly LinkedList
+ * @extends List
+ */
+class DoublyList extends List {
+    
+        /**
+         * Creates a DoublyList
+         */
+        constructor() {
+            this.head = null;
+            this.tail = null;
+        }  
+    
+        /**
+         * Add a value to the end of the list
+         * 
+         * @method add
+         * @param {Object} value
+         * @return {DoublyNode} node - node added
+         */
+        add(value) {
+            let node = new DoublyNode(value);
+    
+            if (this._length) {
+                this.tail.next = node;
+                node.previous = this.tail;
+                this.tail = node;
+            } else {
+                this.head = node;
+                this.tail = node;
+            }
+    
+            this._length++;
+    
+            return node;
+        }
+    
+        /**
+         * Remove node at a posititon
+         * 
+         * @method remove
+         * @param {Integer} position
+         * @return {Object} deleted Node value
+         */
+        remove(position) {
+            let currentNode = this.head,
+                length = this._length,
+                count = 1,
+                message = {failure: 'Failure: Node not found in this list'},
+                beforeNodeToDelete = null,
+                nodeToDelete = null,
+                deletedNode = null;
+    
+            // GUARD: Invalid position 
+            if (position < 1 || position > length) {
+                throw new Error(message.failure);
+            }
+            
+            // GUARD: Head to be deleted
+            if (position === 1) {
+                nodeToDelete = this.head;
+                this.head = currentNode.next;
+    
+                if (!this.head) {
+                    this.head.previous = null;
+                } else {
+                    this.nail = null;
+                }
+    
+                deletedNode = nodeToDelete.data;
+                nodeToDelete = null;
+                this.length--;
+                return deletedNode;
+            }
+    
+            // GUARD: Tail to be deleted
+            if (position === this._length) {
+                nodeToDelete = this.tail;
+                this.tail = this.tail.previous;
+                this.tail.next = null;
+    
+                deletedNode = nodeToDelete.data;
+                nodeToDelete = null;
+                this.length--;
+                return deletedNode;
+            }
+    
+            while(count < position) {
+                currentNode = currentNode.next;
+                count++;
+            }
+    
+            beforeNodeToDelete = currentNode.previous;
+            nodeToDelete = currentNode;
+            afterNodeToDelete = currentNode.next;
+    
+            beforeNodeToDelete.next = afterNodeToDelete;
+            afterNodeToDelete.previous = beforeNodeToDelete;
+            deletedNode = nodeToDelete.data;
+            nodeToDelete = null;
+            
+            this.length--;
+    
+            return deletedNode;
+        }
+    
+        /**
+         * Search for a node at position
+         * 
+         * @method searchNodeAt
+         * @param {Integer} position
+         * @return {DoublyNode}
+         */
+        searchNodeAt(position) {
+            let currentNode = this.head,
+                length = this._length,
+                count = 1;
+                message = {failure: 'Failure: Node not found in this list'};
+    
+            // GUARD: Invalid position
+            if (position < 1 || position > length) {
+                throw new Error(message.failure);
+            }
+    
+            while (count < position) {
+                currentNode = currentNode.next;
+                count++;
+            }
+    
+            return currentNode;
+        }
+    }
