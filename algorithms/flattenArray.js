@@ -1,4 +1,5 @@
 /**
+ * @method flattenArray
  * Flattens a multi-dimensional array
  * 
  * @param {array} arr 
