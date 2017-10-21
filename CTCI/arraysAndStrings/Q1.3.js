@@ -4,14 +4,16 @@
  * 
  */
 
-// function removeDuplicates1(string) {
-//     for (let i = 0; i < string.length; i++) {
-//         for (let n = i + 1; n < string.length; n++) {
-//             if (string[i] === string[n]) {
-//                string = string.slice(0, i + 1) + string.slice(n, string.length);
-//                n--;
-//             }
-//         }
-//     }
-//     return string;
-// }
+function removeDuplicates1(string) {
+    let hash = {};
+    let newString = "";
+
+    for (let i = 0; i < string.length; i++) {
+        if (!hash[string[i]]) {
+            hash[string[i]] = true;
+            newString += string[i]; 
+        }
+    }
+
+    return newString;
+}
