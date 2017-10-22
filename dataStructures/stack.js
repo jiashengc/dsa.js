@@ -47,4 +47,4 @@ class Stack {
             return deletedNode;
         }
     
-    }
+}
